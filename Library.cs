@@ -1,4 +1,4 @@
-class Library
+public class Library
 {
     private List<Book> books = new List<Book>();
     private List<Member> members = new List<Member>();
@@ -71,6 +71,16 @@ class Library
         book.IsAvailable = false;
         member.BorrowedBooks.Add(book);
         Console.WriteLine($"✓ '{book.Title}' borrowed by {member.Name}.");
+    }
+
+    public Book? FindBook(int bookId)
+    {
+        return books.Find(b => b.Id == bookId);
+    }
+
+    public Member? FindMember(int memberId)
+    {
+        return members.Find(m => m.Id == memberId);
     }
 
     public void ReturnBook(int bookId, int memberId)
