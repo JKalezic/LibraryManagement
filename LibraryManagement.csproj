@@ -11,4 +11,8 @@
 		<Compile Remove="LibraryManagement.Tests\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="System.Text.Json" Version="10.0.11" />
+	</ItemGroup>
+
 </Project>

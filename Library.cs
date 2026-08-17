@@ -5,6 +5,8 @@ public class Library
     private int nextBookId = 1;
     private int nextMemberId = 1;
 
+    private DataStorage _storage = new DataStorage();
+    
     public void AddBook(string title, string author)
     {
         books.Add(new Book(nextBookId, title, author));
@@ -168,7 +170,34 @@ public class Library
 
         Console.WriteLine("✓ 50 books seeded.");
         Console.WriteLine("✓ 10 members seeded.");
-
-
     }
+
+    public void Load()
+    {
+        var loadedBooks = _storage.LoadBooks();
+        var loadedMembers = _storage.LoadMembers();
+
+        foreach (Book book in loadedBooks)
+        {
+            books.Add(book);
+            if (book.Id >= nextBookId)
+                nextBookId = book.Id + 1;
+        }
+
+        foreach (Member member in loadedMembers)
+        {
+            members.Add(member);
+            if (member.Id >= nextMemberId)
+                nextMemberId = member.Id + 1;
+        }
+
+        Console.WriteLine($"Loaded {loadedBooks.Count} books and {loadedMembers.Count} members.");
+    }
+
+    public void Save()
+    {
+        _storage.SaveBooks(books);
+        _storage.SaveMembers(members);
+    }
+
 }

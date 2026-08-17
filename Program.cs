@@ -7,6 +7,7 @@ Console.WriteLine("Commands: add book, add member, list books, list members,");
 Console.WriteLine("borrow books, return books, search books, search member books, seed test data, quit");
 Console.WriteLine();
 
+library.Load();
 
 while (true)
 {
@@ -15,6 +16,7 @@ while (true)
 
     if (input == "quit")
     {
+        library.Save();
         Console.WriteLine("Goodbye!");
         break;
     }
