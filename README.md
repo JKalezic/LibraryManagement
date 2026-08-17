@@ -25,9 +25,13 @@ Created with a constructor that requires a title and author, and defaults to ava
 **Library** — Manages the collections of books and members. Contains all the logic 
 for adding, searching, borrowing, and returning books.
 
+## Persistence
+Data is saved to two JSON files (`books.json` and `members.json`) when the app exits and reloaded on startup. Corrupted or missing files are handled gracefully — the app starts with an empty state rather than crashing.
+
 ## Technologies
 - C# / .NET
 - NUnit for unit testing
+- System.Text.Json for data persistence
 
 ## What I Learned
 - How to structure code across multiple classes and files
@@ -36,11 +40,16 @@ for adding, searching, borrowing, and returning books.
 - Guard clauses — returning early from a method when something is wrong
 - How to write unit tests with NUnit using Arrange, Act, Assert pattern
 - The difference between a folder-based and solution-based Visual Studio setup
+- JSON serialization and deserialization with System.Text.Json
+- File I/O — reading and writing files with File.ReadAllText and File.WriteAllText
+- Exception handling with try/catch for graceful error recovery
 
 ## Challenges
 Setting up the test project was the most complex part — the test project needed 
-to be a sibling of the main project rather than nested inside it, and Visual Studio 
-required a solution file to properly discover and run the tests.
+to be inside the main project folder for Git, but required a `<Compile Remove>` 
+exclusion in the main `.csproj` to prevent the two projects from interfering with 
+each other's build. Visual Studio also required a solution file to properly discover 
+and run the tests.
 
 ## Tests
 7 unit tests covering:
